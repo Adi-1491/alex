@@ -1,0 +1,71 @@
+6a 
+6a.l
+%{
+#include "y.tab.h"
+%}
+%%
+[0-9]+(\.[0-9]+)? {return NUM;} [a-zA-Z][_a-zA-Z0-9]* {return ID;} [\t] ;
+\n {return 0;}
+. {return yytext[0];}
+%%
+int yywrap() { }
+6a.y
+½[
+2
+#include<stdio.h>
+3 #includestdlib.hs
+4 % -
+5 %token NUM ID
+6 %left
+7 %left I*'
+8 %%
+9 expr:e (printf ("This is valid expression."); exit (0); ]
+10 e:e+
+11 1
+e
+12
+e
+*P
+13| ee
+14 l
+151 NUM
+16 | ID
+17 %%
+18 int main () f
+19 print ("Type of expression to be tested. In);
+20 yyparse();
+21 return 0;
+22 7
+23 int yyerror Of
+24 printf (" I nInvalid Expression. In") :
+25 exit(0) ;
+26 }
+
+
+6b.l
+%{
+#include "y.tab.h"
+%}
+%%
+[a-z] return L;
+[0-9] return D;
+\n {return NL;}
+%%
+int yywrap() { } 
+6b.y
+%{ #include<stdio.h> %}
+%token L D NL
+%%
+var: L E NL {printf("Valid Variable\n");return 0;} E: E L
+|ED
+|;
+%%
+int yyerror()
+{
+printf("\n Invalid Variable\n");
+return 0; }
+int main()
+{
+printf("\nEnter a variable\n");
+yyparse();
+}
