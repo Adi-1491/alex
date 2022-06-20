@@ -1,0 +1,73 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\froman\fcharset0 Times-Roman;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf2 \expnd0\expndtw0\kerning0
+3a.%\{\
+#include <stdio.h>\
+int wc=0,cc=0,lc=0,bc=0;\
+char infile[25];\
+%\}\
+word [a-zA-Z0-9]+\
+eol [\\n]\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 %%\uc0\u8232 \{word\} \{wc++; cc+=yyleng;\} \{eol\} \{lc++; cc++;\}\u8232 [" "] \{bc++; cc++;\}\u8232 [\\t] \{bc+=8; cc++;\}\u8232 . \{cc++;\}\u8232 %%\u8232 int yywrap()\u8232 \{\}\u8232 int main()\u8232 \{ 
+\f1\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf2      printf("\\nRead the input file\\n");\
+     scanf("%s",infile);\
+     yyin=fopen(infile,"r");\
+     yylex();\
+     printf("Number of characters = %d\\n",cc);\
+     printf("Number of words = %d\\n",wc);\
+     printf("Number of spaces = %d\\n",bc);\
+     printf("Number of lines = %d\\n",lc);\
+     return 0;\
+     fclose(yyin);\
+\}\
+\
+\
+\
+\
+3b.-%\{\
+#include <stdio.h>\
+int cc=0;\
+%\}\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 %x CMNT 
+\f1\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf2 %%\
+"/*" \{BEGIN CMNT;\}\
+<CMNT>. ;\
+<CMNT>"*/" \{BEGIN 0; cc++;\}\
+%%\
+int yywrap()  \{ \}\
+int main(int argc, char *argv[])\
+\{\
+     if(argc!=3)\
+     \{\
+           printf("Usage : %s\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 return 0; \} 
+\f1\fs24 \
+
+\f0\fs29\fsmilli14667 <scr_file> <dest_file>\\n",argv[0]); 
+\f1\fs24 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs29\fsmilli14667 \cf2      yyin=fopen(argv[1],"r");\
+     yyout=fopen(argv[2],"w");\
+     yylex();\
+     printf("\\nNumber of multiline comments = %d\\n",cc);\
+     return 0;\
+\pard\pardeftab720\sa240\partightenfactor0
+\cf2 \} 
+\f1\fs24 \
+}
