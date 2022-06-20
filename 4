@@ -1,0 +1,59 @@
+%{
+#include <stdio.h>
+int ext(int);
+int a[]={0,0,0,0},valid=1,opnd=0,top=-1,i;
+%}
+%x oper
+%%
+["("]
+[")"]
+[a-zA-Z0-9]+
+<oper>"+"
+<oper>"-"
+<oper>"*"
+<oper>"/"
+<oper>"("
+<oper>")"
+<oper>[a-zA-Z0-9]+ {opnd++; if(valid == 0) {valid = 1; a[i]++;} else ext(0);}
+<oper>"\n" {if(valid == 1 && top == -1) {printf("Valid expression\n"); return 0;} else ext(0);}
+.\n ext(0);
+%%
+        {top++;}
+        {top--;}
+        {BEGIN oper; opnd++;}
+{if(valid) {valid = 0; i = 0;} else ext(0);}
+{if(valid) {valid = 0; i = 1;} else ext(0);}
+{if(valid) {valid = 0; i = 2;} else ext(0);}
+{if(valid) {valid = 0; i = 3;} else ext(0);}
+{top++;}
+{top--;}
+int yywrap() {  }
+int ext(int x)
+{
+     printf("\nInvalid expression%d\n",x);
+exit(0); }
+int main() {
+     printf("\nEnter an arithmetic expression\n");
+     yylex();
+     printf("Number of operands = %d\n",opnd);
+     printf("Number of + = %d\n",a[0]);
+     printf("Number of - = %d\n",a[1]);
+     printf("Number of * = %d\n",a[2]);
+     printf("Number of / = %d\n",a[3]);
+return 0; }
+4b
+%{
+#include<stdio.h>
+%}
+ws [ \t\n]
+%% {ws}"and"{ws}|{ws}"AND"{ws} | {ws}"or"{ws}|{ws}"OR"{ws} | {ws}"but"{ws}|{ws}"BUT"{ws} | {ws}"because"{ws} | {ws}"nevertheless"{ws} .;{printf("compound sentence\n");exit(0);}
+\n return 0;
+%%
+int yywrap() {   }
+int main()
+{
+     printf("\nEnter a sentence\n");
+     yylex();
+     printf("Simple sentence");
+     exit(0);
+//return 0;
